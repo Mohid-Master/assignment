@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- date: 4:20 , 4/6/2023  -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        let firstNumber = +prompt("Enter the first number:");
+        let secondNumber = +prompt("Enter the second number:");
+
+        if (firstNumber > secondNumber) {
+            console.log("The first number is larger: " + firstNumber);
+        } else if (secondNumber > firstNumber) {
+            console.log("The second number is larger: " + secondNumber);
+        } else {
+            console.log("The two numbers are equal.");
+        }
+
+
+
+
+        let number = +prompt("Enter a number:");
+
+        if (number > 0) {
+            alert("The number is positive.");
+        } else if (number < 0) {
+            alert("The number is negative.");
+        } else {
+            alert("The number is zero.");
+        }
+
+
+        // let firstNumber = prompt("Enter the first number:");
+        // let secondNumber = prompt("Enter the second number:");
+        let thirdNumber = prompt("Enter the third number:");
+        let fourthNumber = prompt("Enter the fourth number:");
+        let fifthNumber = prompt("Enter the fifth number:");
+
+        let largestNumber = firstNumber;
+
+        if (secondNumber > largestNumber) {
+            largestNumber = secondNumber;
+        }
+        if (thirdNumber > largestNumber) {
+            largestNumber = thirdNumber;
+        }
+        if (fourthNumber > largestNumber) {
+            largestNumber = fourthNumber;
+        }
+
+        if (fifthNumber > largestNumber) {
+            largestNumber = fifthNumber;
+        }
+
+        console.log("The largest number is: " + largestNumber);
+
+
+
+
+        for (let i = 0; i <= 15; i++) {
+            if (i % 2 === 0) {
+                console.log(i + " is even.");
+            } else {
+                console.log(i + " is odd.");
+            }
+        }
+
+
+        // Determine the letter grade based on the average marks
+        let averageMarks = +prompt("Enter your average marks: ")
+        let letterGrade;
+        if (averageMarks >= 90) {
+            letterGrade = "A+";
+        } else if (averageMarks >= 80) {
+            letterGrade = "A";
+        } else if (averageMarks >= 70) {
+            letterGrade = "B";
+        } else if (averageMarks >= 60) {
+            letterGrade = "C";
+        } else if (averageMarks >= 50) {
+            letterGrade = "D";
+        } else {
+            letterGrade = "F";
+        }
+
+        // Display the letter grade
+        console.log("Letter grade: " + letterGrade);
+
+
+
+        for (let i = 1; i <= 100; i++) {
+            if (i % 3 === 0 && i % 5 === 0) {
+                console.log("FizzBuzz");
+            } else if (i % 3 === 0) {
+                console.log("Fizz");
+            } else if (i % 5 === 0) {
+                console.log("Buzz");
+            } else {
+                console.log(i);
+            }
+        }
+
+        // for pattern
+        /*
+        *
+        **
+        ***
+        ****
+        *****
+        */
+
+        let pattern = "";
+        for (let i = 0; i < 5; i++) {
+            pattern += "*"
+            console.log(pattern);
+        }
+
+    </script>
+</body>
+
+</html>
