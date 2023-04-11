@@ -106,8 +106,8 @@ use for storing the object, and the second argument is the object to store.*/
 console.log("Q6");
 function storeInLocalStorage(key, object) {
   stringifyiedObject = JSON.stringify(object);
-   localStorage.setItem(key, stringifyiedObject);
-   return localStorage.getItem(key)
+  localStorage.setItem(key, stringifyiedObject);
+  return localStorage.getItem(key);
 }
 const demoObj1 = { Try: 1, objectType: "demo", worked: true };
 const Answer6 = storeInLocalStorage("Test1", demoObj1);
@@ -131,7 +131,10 @@ the value. The function should also retrieve the object from localStorage
 and return it as a new object.*/
 console.log("Q8");
 function storeAndRetrievesFromLocalStorage(object) {
-  const newObject = {};
+  const newObject = {
+    objectIssueTime:
+      new Date().toDateString()
+  };
   if (typeof object === "object") {
     keysArray = Object.keys(object);
     keysArray.forEach((key) => {
