@@ -1,0 +1,69 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px solid; */
+}
+html {
+  /* width: 100vw; */
+  font-size: 62.5%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background: var(--gray-smooth);
+  font-family: "Bellota text";
+
+}
+h1::first-letter,
+h2::first-letter,
+h3::first-letter,
+h4::first-letter,
+h5::first-letter,
+h6::first-letter,
+p::first-letter,
+span::first-letter {
+  text-transform: uppercase;
+}
+@media (max-width: 1040px) {
+  html {
+    font-size: 55%;
+  }
+}
+@media (max-width: 998px) {
+  html {
+    font-size: 55%;
+  }
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 45%;
+  }
+}
+@media (max-width: 568px) {
+  html {
+    font-size: 42.5%;
+  }
+}
+@media (max-width: 458px) {
+  html {
+    font-size: 37.5%;
+  }
+}
+/* @media (max-width: 368px) {
+  html {
+    font-size: 35%;
+  }
+}
+@media (max-width: 268px) {
+  html {
+    font-size: 27%;
+  }
+}
+@media (max-width: 168px) {
+  html {
+    font-size: 20%;
+  }
+} */
