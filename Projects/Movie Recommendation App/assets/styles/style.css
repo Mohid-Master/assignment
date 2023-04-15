@@ -50,31 +50,77 @@
   grid-template-columns: repeat(autofit, minmax(40rem, 1fr));
 }
 
-
 /*  */
-.inputsContainer {}
-.inputsContainer .inputGenre {}
-.inputsContainer .inputGenre label {}
-.inputsContainer .inputGenre input {}
-.inputsContainer .inputYear {}
-.inputsContainer .inputYear label {}
-.inputsContainer .inputYear input {}
-.inputsContainer .inputLanguage {}
-.inputsContainer .inputLanguage label {}
-.inputsContainer .inputLanguage input {}
-.inputsContainer .inputRating {}
-.inputsContainer .inputRating label {}
-.inputsContainer .inputRating input {}
-.inputsContainer .inputTitle {}
-.inputsContainer .inputTitle label {}
-.inputsContainer .inputTitle input {}
-.additionalFeatureContainer {}
-.moviesListContainer {}
-.moviesListContainer .Header {}
-.moviesListContainer .Header .rank {}
-.moviesListContainer .Header .MovieDetail {}
-.moviesListContainer .Header .Year {}
-.moviesListContainer .Movie {}
-.moviesListContainer .Movie .rank {}
-.moviesListContainer .Movie .MovieDetail {}
-.moviesListContainer .Movie .Year {}
+*{
+    border: 1px solid;
+}
+body {
+  font-size: 2rem;
+}
+.inputsContainer {
+    margin-top: 5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.inputsContainer .inputGenre {
+}
+.inputsContainer .inputGenre label {
+}
+.inputsContainer .inputGenre input {
+}
+.inputsContainer .inputYear {
+}
+.inputsContainer .inputYear label {
+}
+.inputsContainer .inputYear input {
+}
+.inputsContainer .inputLanguage {
+}
+.inputsContainer .inputLanguage label {
+}
+.inputsContainer .inputLanguage input {
+}
+.inputsContainer .inputRating {
+  grid-area: 3/1/3/3;
+}
+.inputsContainer .inputRating label {
+}
+.inputsContainer .inputRating input {
+}
+.inputsContainer .inputTitle {
+  grid-area: 4/1/4/3;
+}
+.inputsContainer .inputTitle label {
+}
+.inputsContainer .inputTitle input {
+}
+.additionalFeatureContainer {
+}
+.moviesListContainer {
+  width: 80vw;
+  margin: 1rem 10vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.moviesListContainer .Header {
+  display: grid;
+  grid-template-columns: 5vw 70vw 5vw;
+}
+.moviesListContainer .Header .rank {
+}
+.moviesListContainer .Header .MovieDetail {
+}
+.moviesListContainer .Header .Year {
+}
+.moviesListContainer .Movie {
+  display: grid;
+  grid-template-columns: 5vw 70vw 5vw;
+}
+.moviesListContainer .Movie .rank {
+}
+.moviesListContainer .Movie .MovieDetail {
+}
+.moviesListContainer .Movie .Year {
+}
