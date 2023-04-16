@@ -4,51 +4,72 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/basic-style.css" />
     <link rel="stylesheet" href="assets/styles/style.css" />
     <title>Movie Recommendation App</title>
   </head>
   <body>
-    <div class="inputsContainer">
-      <div class="inputGenre">
-        <label for="inputGenre">Genre</label>
-        <input type="text" name="inputGenre" />
+    <div class="container">
+      <div class="inputsContainer">
+        <div class="inputGenre">
+          <label for="inputGenre">Genre</label>
+          <!-- <input type="text" name="inputGenre" /> -->
+          <select type="text" name="inputGenre" class="userInput">
+            <option value="all">All</option>
+          </select>
+        </div>
+        <div class="inputYear">
+          <label for="inputYear">Year</label>
+          <input
+            type="number"
+            name="inputYear"
+            min="1902"
+            max="2021"
+            placeholder="1902-2021"
+            class="userInput"
+          />
+        </div>
+        <div class="inputLanguage">
+          <label for="inputLanguage">Language</label>
+          <select type="text" name="inputLanguage" class="userInput">
+            <option value="all">All</option>
+          </select>
+        </div>
+        <div class="inputRating">
+          <label for="inputRating">Rating</label>
+          <select type="text" name="inputRating" class="userInput">
+            <option value="all">All</option>
+          </select>
+        </div>
+        <div class="inputTitle">
+          <label for="inputTitle">Search Movie by Name</label>
+          <select type="text" name="inputTitle" class="userInput">
+            <option value="all">All</option>
+          </select>
+        </div>
       </div>
-      <div class="inputYear">
-        <label for="inputYear">Year</label>
-        <input type="text" name="inputYear" />
-
-      </div>
-      <div class="inputLanguage">
-        <label for="inputLanguage">Language</label>
-        <input type="text" name="inputLanguage" />
-
-      </div>
-      <div class="inputRating">
-        <label for="inputRating">Rating</label>
-        <input type="text" name="inputRating" />
-
-      </div>
-      <div class="inputTitle">
-        <label for="inputTittle">Search Movie by Name</label>
-        <input type="text" name="inputTittle" />
-
-      </div>
-    </div>
-    <div class="additionalFeatureContainer"></div>
-    s
-    <div class="moviesListContainer">
+      <div class="additionalFeatureContainer"></div>
+      <div class="moviesListContainer">
         <div class="Header">
-            <div class="rank">Rank</div>
-            <div class="MovieDetail">Movie</div>
-            <div class="Year">Year</div>
+          <div class="rank">Rank</div>
+          <div class="MovieDetail">Movie</div>
+          <div class="Year">Year</div>
         </div>
         <div class="Movie">
-            <div class="rank">Rank</div>
-            <div class="MovieDetail">Movie</div>
-            <div class="Year">Year</div>
+          <div class="rank">Rank</div>
+          <div class="MovieDetail">
+            <img src="" alt="" class="img">
+            <div class="title"></div>
+            <div class="decription"></div>
+          </div>
+          <div class="Year">Year</div>
         </div>
+      </div>
     </div>
     <a href="assets/JS Assigment 3.pdf" class="btn"></a>
   </body>
+  <script src="assets/app.js"></script>
 </html>
