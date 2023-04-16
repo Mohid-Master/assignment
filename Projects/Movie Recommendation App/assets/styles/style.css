@@ -81,6 +81,10 @@
   justify-content: center;
   flex-direction: column;
 }
+.moviesListContainer .error{
+font-size: 3rem;
+color: red;
+}
 .moviesListContainer .Header {
   display: grid;
   gap: 1rem;
@@ -116,17 +120,60 @@
 .moviesListContainer .Movie .rank {
 }
 .moviesListContainer .Movie .MovieDetail .img {
-  grid-area: 1/1/1/2;
+  grid-area: a;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
 }
 .moviesListContainer .Movie .MovieDetail .title {
+  grid-area: b;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  color: #0b95cc;
+  font-size: 2.5rem;
+  font-weight: bolder;
 }
 .moviesListContainer .Movie .MovieDetail .decription {
+  grid-area: c;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  color: #696969;
+  font-size: 1.7rem;
+  font-weight: bolder;
 }
+.moviesListContainer .Movie .MovieDetail .decription .certification {
+  border: 1px solid #797979;
+  border-radius: 0.5rem;
+  background: radial-gradient(#fff, #d3d3d3);
+  padding: 0.2rem 1rem;
+}
+.moviesListContainer .Movie .MovieDetail .decription .generes {
+}
+.moviesListContainer .Movie .MovieDetail .decription .time {
+}
+.moviesListContainer .Movie .MovieDetail .decription .trailer {
+  text-decoration: none;
+    text-decoration: none;
+    margin: 0.1rem 0.3rem;
+    color: rgb(136, 221, 255);
+    transition: all .5s;
+}.moviesListContainer .Movie .MovieDetail .decription .trailer:hover{
+    color: rgb(255, 70, 70);
+}
+
 .moviesListContainer .Movie .MovieDetail {
   width: 100%;
   display: grid;
+  padding: 0.2rem;
   grid-template-columns: 20% 80%;
-  height: 7rem;
+  grid-template-rows: 50% 50%;
+  grid-template-areas:
+    "a b"
+    "a c";
+  height: 10rem;
 }
 
 .moviesListContainer .Movie .Year {

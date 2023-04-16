@@ -59,201 +59,157 @@ to input their preferences and displays movie recommendations dynamically.
 */
 
 const inputsArray = document.querySelectorAll(".userInput");
+const moviesListContainer = document.querySelector(".moviesListContainer");
 // inputsArray.forEach((input, index) => (inputsArray[index] = input.value));
 const [inputGenere, inputYear, inputLanguagage, inputRating, inputTitle] =
   inputsArray;
 
-// first the given json contains complicated array i will try to make it simple
-class simpleMovieObject {
-  constructor(id, title, genere) {
-    this.id = id;
-    this.title = title;
-    this.genere = genere;
-  }
-}
-simpleMovieObjectArray = [];
-objs = [];
-// document.querySelector(".form-control").select2({ tags: true });
 allGenres = [];
 allYear = [];
 allLanguage = [];
 allRatings = [];
-allTittle = [];
+allTitle = [];
 
-// console.log(allGenres, allYear, allLanguage, allTittle,allRatings);
-
+// console.log(allGenres, allYear, allLanguage, allTitle,allRatings);
+// Fetch Movies Main Stram
 (async function () {
   const response = await fetch("./assets/data.json");
   console.log(response);
   const Movies = await response.json();
+  console.log(Movies);
+  const headerElement = `        
+  <div class="Header">
+  <div class="rank">Rank</div>
+  <div class="MovieDetail">Movie</div>
+  <div class="Year">Year</div>
+  </div>`;
+  (
+    // Input & Select Data Managment To Call Search
+    function () {
+      Movies.forEach((movie) => {
+        let { title, genres, release_date, vote_average, original_language } =
+          movie;
+        year = release_date.split("-")[0];
+        allGenres.push(...genres);
+        allYear.push(year);
+        allTitle.push(title);
+        allLanguage.push(original_language);
+        allRatings.push(vote_average);
+      });
+      allYear = [...new Set(allYear)].sort((a, b) => a - b);
+      allRatings = [...new Set(allRatings)].sort((a, b) => b - a);
+      allGenres = [...new Set(allGenres)].slice(0, 16);
+      allTitle = [...new Set(allTitle)].slice(0, 300);
+      allLanguage = [...new Set(allLanguage)];
+      allGenres.forEach((genere) => {
+        inputGenere.innerHTML += `<option value="${genere}">${genere}</option>`;
+      });
+      allRatings.forEach((Rate) => {
+        inputRating.innerHTML += `<option value="${Rate}">${Rate}</option>`;
+      });
+      allLanguage.forEach((language) => {
+        inputLanguagage.innerHTML += `<option value="${language}">${language}</option>`;
+      });
+      (async function () {
+        allTitle.forEach((title) => {
+          inputTitle.innerHTML += `<option value="${title}">${title}</option>`;
+        });
+        inputsArray.forEach((e) =>
+          e.addEventListener("input", (e) => Search(e.target.value))
+        );
+      })();
+    }
+  )();
 
-  Movies.forEach((movie) => {
-    let { title, genres, release_date, vote_average, original_language } =
-      movie;
-    year = release_date.split("-")[0];
-    allGenres.push(...genres);
-    allYear.push(year);
-    allTittle.push(title);
-    allLanguage.push(original_language);
-    allRatings.push(vote_average);
-  });
-  allYear = [...new Set(allYear)].sort((a, b) => a - b);
-  allRatings = [...new Set(allRatings)].sort((a, b) => b - a);
-  allGenres = [...new Set(allGenres)];
-  allTittle = [...new Set(allTittle)];
-  allLanguage = [...new Set(allLanguage)];
-  allGenres.forEach((genere) => {
-    inputGenere.innerHTML += `<option value="${genere}">${genere}</option>`;
-  });
-  allRatings.forEach((Rate) => {
-    inputRating.innerHTML += `<option value="${Rate}">${Rate}</option>`;
-  });
-  allTittle.forEach((title) => {
-    inputTitle.innerHTML += `<option value="${title}">${title}</option>`;
-  });
+  
+  // Display Movies
+   function moviesDisplayer(Movies) {
+    if (Movies.length !== 0) {
+      const movieElementArray = [headerElement]
+      console.log("pass");
+      Movies.forEach((movie, index) => {
+        duration =
+          Math.floor(movie.runtime / 60) != 0
+            ? Math.floor(movie.runtime / 60) +
+              "hr" +
+              " " +
+              (movie.runtime % 60) +
+              "min"
+            : (movie.runtime % 60) + "min";
+        const movieElement =  `
+  <div class="Movie">
+  <div class="rank">${index + 1}</div>
+  <div class="MovieDetail">
+    <img src="https://image.tmdb.org/t/p/w45${movie.poster_path}" alt="${
+          movie.title
+        }" class="img">
+    <div class="title">${movie.title}</div>
+    <div class="decription">
+      <span class="certification">${movie.certification}</span>
+      <span class="generes">${movie.genres}</span>
+      <span class="time">${duration}</span>
+      <a href="https://www.youtube.com/watch?v=${movie.trailer_yt}"class="trailer" target="_blank">watch trailer</a>
+    </div>
+  </div>
+  <div class="Year">${movie.release_date.split("-")[0]}</div>
+</div>`;
+    // moviesListContainer.innerHTML += `<img src="assets/Gif/Spinner-1.1s-261px.gif" alt="Loading..." class="img">`;
+        // moviesListContainer.innerHTML += movieElement;
+        movieElementArray.push(movieElement)
+      });
+      console.log(movieElementArray);
+      setTimeout(() => moviesListContainer.innerHTML = movieElementArray.map(movie=>movie), 3000);
+    } else {
+      moviesListContainer.innerHTML = `        
+      <div class="Header">
+      <div class="rank">Rank</div>
+      <div class="MovieDetail">Movie</div>
+      <div class="Year">Year</div></div>
+        <div class="error">Not Found!
+        all Search will be Resetted in 3 seconds
+        </div>
+        `;
+      setTimeout(() => {
+        moviesListContainer.innerHTML = headerElement;
+        resetUserInput();
+      }, Math.random()*300);
+    }
+  }
+// search
+  function Search(value) {
+    let filteredMovies = Movies.filter((movieObj) => {
+      return inputGenere.value !== "all"
+        ? movieObj.genres.includes(value)
+        : movieObj;
+    });
+    filteredMovies = filteredMovies.filter((movieObj) => {
+      return inputTitle.value !== "all"
+        ? movieObj.title.includes(value)
+        : movieObj;
+    });
+    filteredMovies = filteredMovies.filter((movieObj) => {
+      return inputYear.value !== "0000"
+        ? movieObj.release_date.includes(value)
+        : movieObj;
+    });
+    filteredMovies = filteredMovies.filter((movieObj) => {
+      return inputLanguagage.value !== "all"
+        ? movieObj.original_language.includes(value)
+        : movieObj;
+    });
+    filteredMovies = filteredMovies.filter((movieObj) => {
+      return inputRating.value !== "all"
+        ? movieObj.vote_average == inputRating.value
+        : movieObj;
+    });
+    moviesListContainer.innerHTML = `${headerElement}<img src="assets/Gif/Spinner-1.1s-261px.gif" alt="Loading..." class="img">`;
+    console.log(filteredMovies);
+    filteredMovies.length!=0?moviesDisplayer(filteredMovies):Movies;
+  }
+  function resetUserInput() {
+    inputsArray.forEach((input) => (input.value = "all"));
+    inputsArray[1].value = "0000";
+  }
 
-  console.log(
-    Movies[0].homepage,
-    "&",
-    Movies[0].vote_average,
-    "&",
-    Movies[0].vote_count
-  );
-  console.log(
-    Movies.filter((movie) => {
-      return movie.release_date.split("-")[0] == 2000;
-    })
-  );
-  /*
-cast
-certification
-: 
-"R"
-directors
-: 
-[{…}]
-external_ids
-: 
-{imdb_id: 'tt0213847'}
-genres
-: 
-"Drama"
-id
-: 
-10867
-original_language
-: 
-"Italian"
-overview
-: 
-"On the day in 1940 that Italy enters the war, two things happen to the 12-year-old Renato: he gets his first bike, and he gets his first look at Malèna. She is a beautiful, silent outsider who's moved to this Sicilian town to be with her husband, Nico. He promptly goes off to war, leaving her to the lustful eyes of the men and the sharp tongues of the women. During the next few years, as Renato grows toward manhood, he watches Malèna suffer and prove her mettle. He sees her loneliness, then grief when Nico is reported dead, the effects of slander on her relationship with her father, her poverty and search for work, and final humiliations. Will Renato learn courage from Malèna and stand up for her?"
-popularity
-: 
-37.517
-poster_path
-: 
-"/zdnjZa9HfBxlQnCX4dqCbbzxsLI.jpg"
-release_date
-: 
-"2000-03-16"
-revenue
-: 
-14493284
-runtime
-: 
-109
-similar
-: 
-(20) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-tagline
-: 
-"She was too young to be a widow, and too beautiful to be alone. Every man wanted to have her. One boy risked everything to protect her."
-title
-: 
-"Malena"
-trailer_yt
-: 
-"SxqUoUvNBXY"
-vote_average
-: 
-7.3
-vote_count
-: 
-1230
-writers
-
-*/
-
-  // `https://image.tmdb.org/t/p/w45${movie.poster_path}`
-  // https://www.youtube.com/watch?v=
-
-  /*
-cast,
-certification,
-directors,
-external_ids,
-genres,
-id,
-original_language,
-overview,
-popularity,
-poster_path,
-release_date,
-revenue,
-runtime,
-similar,
-tagline,
-title,
-trailer_yt,
-vote_average,
-vote_count,
-writers
-// 
-cast,
-certification,
-directors,
-external_ids,
-genres,
-id,
-original_language,
-overview,
-popularity,
-poster_path,
-release_date,
-revenue,
-runtime,
-similar,
-tagline,
-title,
-trailer_yt,
-vote_average,
-vote_count,
-writers
-*/
-
-  console.log(
-    Movies.filter((movie) => {
-      return movie.original_language.toLowerCase() === "italian";
-    })
-  );
-  // console.log(
-  //   Movies.filter((movie) => {
-  //     return movie.runtime <= 90;
-  //   })
-  // );
-  // Movies.forEach((movie, index) => {
-  //   a=movie.release_date.split("-")[0]==2000
-  //   console.log(a);
-  // })
-  Movies.forEach((movie, index) => {
-    let { title, genres, vote_average, release_date } = movie;
-    obj = new simpleMovieObject(index, title, genres);
-    // console.log(obj.genere.includes("M") ? obj : false);
-    // console.log(movie.genres);
-  });
+Search()
 })();
-
-//  Get Input as Query
-//  Search Query
-// Recommended Movies
-// Show Movies
